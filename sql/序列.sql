@@ -1,0 +1,18 @@
+
+-- 学生序列
+CREATE SEQUENCE stu_seq
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 10;
+
+--成绩序列
+CREATE SEQUENCE score_seq
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 10;
+
+--课程序列
+CREATE SEQUENCE course_seq
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 10;
