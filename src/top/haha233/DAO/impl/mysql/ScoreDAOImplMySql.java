@@ -4,7 +4,7 @@ import top.haha233.DAO.ScoreDAO;
 import top.haha233.entity.Course;
 import top.haha233.entity.Score;
 import top.haha233.entity.Student;
-import top.haha233.util.MySqlJdbc;
+import top.haha233.util.MySqlJDBC;
 
 import javax.annotation.CheckForNull;
 import java.sql.ResultSet;
@@ -38,7 +38,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         ArrayList<Object> paramList = new ArrayList<>(1);
         paramList.add(name + '%');
 
-        return queryAllScore(sql, paramList, 3);
+        return queryAllScore(sql, paramList, 2);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class ScoreDAOImplMySql implements ScoreDAO {
 
         ArrayList<Object> paramList = new ArrayList<>(1);
         paramList.add(name + '%');
-
-        return queryAllScore(sql, paramList, 3);
+	    System.out.println(paramList);
+	    return queryAllScore(sql, paramList, 2);
     }
 
     @CheckForNull
@@ -63,7 +63,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         ArrayList<Object> paramList = new ArrayList<>(1);
         paramList.add(id);
 
-        Object o = MySqlJdbc.execute(sql, paramList, 2);
+        Object o = MySqlJDBC.execute(sql, paramList, 2);
         if (o == null) {
             return null;
         }
@@ -83,7 +83,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            MySqlJdbc.closeResoure(rs, null);
+            MySqlJDBC.clossConnection();
         }
         return score;
     }
@@ -98,7 +98,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         paramList.add(score.getCourse().getId());
         paramList.add(score.getScore());
 
-        Object o = MySqlJdbc.execute(sql, paramList, 1);
+        Object o = MySqlJDBC.execute(sql, paramList, 1);
         if (o == null) {
             return -1;
         }
@@ -114,7 +114,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         paramList.add(score.getScore());
         paramList.add(score.getId());
 
-        Object o = MySqlJdbc.execute(sql, paramList, 1);
+        Object o = MySqlJDBC.execute(sql, paramList, 1);
         if (o == null) {
             return -1;
         }
@@ -129,7 +129,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         ArrayList<Object> paramList = new ArrayList<>(1);
         paramList.add(score.getId());
 
-        Object o = MySqlJdbc.execute(sql, paramList, 1);
+        Object o = MySqlJDBC.execute(sql, paramList, 1);
         if (o == null) {
             return -1;
         }
@@ -142,15 +142,15 @@ public class ScoreDAOImplMySql implements ScoreDAO {
         switch (type) {
             //1根据stuid查
             case 1:
-                o = MySqlJdbc.execute(sql, paramList, 2);
+                o = MySqlJDBC.execute(sql, paramList, 2);
                 break;
             //2根据Courseid查
             case 2:
-                o = MySqlJdbc.execute(sql, paramList, 2);
+                o = MySqlJDBC.execute(sql, paramList, 2);
                 break;
             //查询所有
             case 3:
-                o = MySqlJdbc.execute(sql, 2);
+                o = MySqlJDBC.execute(sql, 2);
                 break;
             default:
                 break;
@@ -175,6 +175,7 @@ public class ScoreDAOImplMySql implements ScoreDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            MySqlJDBC.clossConnection();
         }
         return arrayList;
     }

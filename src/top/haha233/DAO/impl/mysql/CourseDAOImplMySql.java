@@ -2,7 +2,7 @@ package top.haha233.DAO.impl.mysql;
 
 import top.haha233.DAO.CourseDAO;
 import top.haha233.entity.Course;
-import top.haha233.util.MySqlJdbc;
+import top.haha233.util.MySqlJDBC;
 
 import javax.annotation.CheckForNull;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class CourseDAOImplMySql implements CourseDAO {
         //language=MySQL
         String sql = "SELECT id, name FROM course WHERE isdelete = 0";
 
-        Object o = MySqlJdbc.execute(sql, 2);
+        Object o = MySqlJDBC.execute(sql, 2);
         if (o == null) {
             return null;
         }
@@ -32,7 +32,7 @@ public class CourseDAOImplMySql implements CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            MySqlJdbc.closeResoure(rs, null);
+            MySqlJDBC.clossConnection();
         }
         return a;
     }
@@ -47,7 +47,7 @@ public class CourseDAOImplMySql implements CourseDAO {
         ArrayList<Object> paramList = new ArrayList<>(1);
         paramList.add(id);
 
-        Object o = MySqlJdbc.execute(sql, paramList, 2);
+        Object o = MySqlJDBC.execute(sql, paramList, 2);
         if (o == null) {
             return null;
         }
@@ -61,7 +61,7 @@ public class CourseDAOImplMySql implements CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            MySqlJdbc.closeResoure(rs, null);
+	        MySqlJDBC.clossConnection();
         }
         return c;
     }

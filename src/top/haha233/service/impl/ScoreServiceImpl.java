@@ -76,7 +76,6 @@ public class ScoreServiceImpl implements ScoreService {
 			//转发至原先的queryScore.jsp 查询页面
 			si.retMap = scoreMap;
 			return si;
-//			System.out.println("不可能会出现");
 		}
 		System.out.println(key);
 		//按条件查询
@@ -93,13 +92,17 @@ public class ScoreServiceImpl implements ScoreService {
 			System.out.println("进入模糊查询");
 			ArrayList<Score> a = DAOFactory.getScoreDao(sqlType).queryAllByStudentName(key);
 			System.out.println(a);
-			for (Score s : a) {
-				scoreMap.put(s.getId(), s);
+			if (a != null) {
+				for (Score s : a) {
+					scoreMap.put(s.getId(), s);
+				}
 			}
 			a = DAOFactory.getScoreDao(sqlType).queryAllByCourseName(key);
 			System.out.println(a);
-			for (Score s : a) {
-				scoreMap.put(s.getId(), s);
+			if (a != null) {
+				for (Score s : a) {
+					scoreMap.put(s.getId(), s);
+				}
 			}
 		}
 		si.retMap = scoreMap;

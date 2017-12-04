@@ -10,6 +10,10 @@
 <%
     String userinfo = "";
     Cookie[] cookies = request.getCookies();
+    if (cookies==null){
+        out.print("<script>location.href='login.html';</script>");
+    	return;
+    }
     for (Cookie c : cookies) {
         if ("userinfo".equals(c.getName())) {
             userinfo = java.net.URLDecoder.decode(c.getValue(), "UTF-8");//解码
